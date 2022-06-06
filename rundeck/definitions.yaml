@@ -233,6 +233,18 @@ JobBulkOperationResponse:
       type: array
       items: {$ref: '#/definitions/BulkJobFailedInfo'}
 
+JobInputFileUploadResponse:
+  required:
+  - total
+  - options
+  properties:
+    total:
+      description: The number of upload options in the post request.
+      type: number
+    options:
+      description: The name of option and id.
+      type: object
+
 JobInputFileListResponse:
   required:
   - paging
