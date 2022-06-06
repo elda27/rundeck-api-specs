@@ -422,12 +422,13 @@ paths:
           format: file
       responses:
         '200':
-          description: Yay
+          description: Input file name and its id.
+          schema: {$ref: '#/definitions/JobInputFileUploadResponse'}
 
   /api/26/job/{id}/input/files:
     get:
       summary: List uploaded input files for job
-      operationId: jobInputFileUpload
+      operationId: jobInputFileList
       tags:
       - job
       parameters:
