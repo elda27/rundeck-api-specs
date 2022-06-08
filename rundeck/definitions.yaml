@@ -265,7 +265,6 @@ JobInputFileInfo:
   - jobId
   - dateCreated
   - serverNodeUUID
-  - fileName
   - expirationDate
   - exec
   properties:
