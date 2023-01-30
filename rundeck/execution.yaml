@@ -214,7 +214,7 @@ paths:
           type: string
         - name: asUser
           in: query
-          type: str
+          type: string
         - name: forceIncomplete
           in: query
           type: boolean
