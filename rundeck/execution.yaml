@@ -1,15 +1,15 @@
-swagger: '2.0'
+swagger: "2.0"
 info:
   version: 1.0.0
   title: Rundeck
   license:
     name: MIT
 schemes:
-- http
+  - http
 produces:
-- application/json
+  - application/json
 consumes:
-- application/json
+  - application/json
 
 paths:
   /api/26/execution/{id}:
@@ -17,28 +17,28 @@ paths:
       summary: Get the status of an execution by ID
       operationId: executionStatusGet
       tags:
-      - execution
+        - execution
       parameters:
-      - name: id
-        in: path
-        required: True
-        type: string
+        - name: id
+          in: path
+          required: True
+          type: string
       responses:
-        '200':
+        "200":
           description: Execution status
-          schema: {$ref: '#/definitions/Execution'}
+          schema: { $ref: "#/definitions/Execution" }
     delete:
       summary: Delete an exeuction by ID
       operationId: executionDelete
       tags:
-      - execution
+        - execution
       parameters:
-      - name: id
-        in: path
-        required: True
-        type: string
+        - name: id
+          in: path
+          required: True
+          type: string
       responses:
-        '204':
+        "204":
           description: No content
 
   /api/26/executions/delete:
@@ -46,123 +46,133 @@ paths:
       summary: Bulk delete executions
       operationId: executionBulkDelete
       tags:
-      - execution
+        - execution
       parameters:
-      - name: ExecutionBulkDeleteRequest
-        in: body
-        required: true
-        schema:
-          required:
-          - ids
-          properties:
-            ids:
-              type: array
-              items: {type: string}
+        - name: ExecutionBulkDeleteRequest
+          in: body
+          required: true
+          schema:
+            required:
+              - ids
+            properties:
+              ids:
+                type: array
+                items: { type: string }
       responses:
-        '200':
+        "200":
           description: Execution deleted response
-          schema: {$ref: '#/definitions/JobExecutionDelete'}
+          schema: { $ref: "#/definitions/JobExecutionDelete" }
 
   /api/26/execution/{id}/state:
     get:
       summary: Get detail about the node and step state of an execution by ID. The execution can be currently running or completed.
       operationId: executionStateGet
       tags:
-      - execution
+        - execution
       parameters:
-      - name: id
-        in: path
-        required: True
-        type: string
+        - name: id
+          in: path
+          required: True
+          type: string
       responses:
-        '200':
+        "200":
           description: Ok
-          schema: {$ref: '#/definitions/ExecutionState'}
+          schema: { $ref: "#/definitions/ExecutionState" }
 
   /api/26/execution/{id}/input/files:
     get:
       summary: List input files for an execution
       operationId: executionInputFilesList
       tags:
-      - file
-      - execution
+        - file
+        - execution
       parameters:
-      - name: id
-        in: path
-        required: True
-        type: string
+        - name: id
+          in: path
+          required: True
+          type: string
       responses:
-        '200':
+        "200":
           description: List of execution input files
-          schema: 
+          schema:
             required:
-            - files
+              - files
             properties:
               files:
                 type: array
-                items: {$ref: '#/definitions/JobInputFileInfo'}
+                items: { $ref: "#/definitions/JobInputFileInfo" }
 
   /api/26/project/{project}/executions/running:
     get:
       summary: List job executions
       operationId: executionListRunning
       tags:
-      - project
-      - execution
+        - project
+        - execution
       parameters:
-      - name: project
-        in: path
-        required: True
-        description: Project name or * for all projects
-        type: string
+        - name: project
+          in: path
+          required: True
+          description: Project name or * for all projects
+          type: string
       responses:
-        '200':
+        "200":
           description: List of executions for job
-          schema: {$ref: '#/definitions/ExecutionList'}
+          schema: { $ref: "#/definitions/ExecutionList" }
 
   /api/26/project/{project}/executions:
     get:
       summary: Query for Executions based on Job or Execution details
       operationId: executionQuery
       tags:
-      - execution
+        - execution
       parameters:
-      - name: project
-        in: path
-        required: True
-        type: string
-      - name: statusFilter
-        in: query
-        type: string
-        enum: ['running', 'succeeded', 'failed', 'aborted', 'timedout', 'failed-with-retry', 'scheduled', 'other']
-      - name: abortedbyFilter
-        in: query
-        description: Username who aborted an execution
-        type: string
-      - name: userFilter
-        in: query
-        description: Username who started the execution
-        type: string
-      - name: recentFilter
-        in: query
-        description: |
-          Use a simple text format to filter executions that completed within a period of time. The format is “XY” where X is an integer, and “Y” is one of:
-          * h: hour
-          * d: day
-        type: string
-      - name: olderFilter
-        in: query
-        description: (same format as recentFilter) return executions that completed before the specified relative period of time
-        type: string
-      - name: begin
-        in: query
-        description: Specify exact date for earliest execution completion time
-        type: string
-      - name: adhoc
-        in: query
-        type: boolean
+        - name: project
+          in: path
+          required: True
+          type: string
+        - name: statusFilter
+          in: query
+          type: string
+          enum:
+            [
+              "running",
+              "succeeded",
+              "failed",
+              "aborted",
+              "timedout",
+              "failed-with-retry",
+              "scheduled",
+              "other",
+            ]
+        - name: abortedbyFilter
+          in: query
+          description: Username who aborted an execution
+          type: string
+        - name: userFilter
+          in: query
+          description: Username who started the execution
+          type: string
+        - name: recentFilter
+          in: query
+          description: |
+            Use a simple text format to filter executions that completed within a period of time. The format is “XY” where X is an integer, and “Y” is one of:
+            * h: hour
+            * d: day
+          type: string
+        - name: olderFilter
+          in: query
+          description: (same format as recentFilter) return executions that completed before the specified relative period of time
+          type: string
+        - name: begin
+          in: query
+          description: Specify exact date for earliest execution completion time
+          type: string
+        - name: adhoc
+          in: query
+          type: boolean
       responses:
-        '200':
+        "200":
           description: Success
 
   /api/26/execution/{id}/output:
@@ -170,45 +180,47 @@ paths:
       summary: List input files for an execution
       operationId: executionOutputGet
       tags:
-      - file
-      - execution
+        - file
+        - execution
       parameters:
-      - name: id
-        in: path
-        required: True
-        type: string
-      - name: offset
-        in: query
-        required: false
-        type: string
-      - name: maxlines
-        in: query
-        required: false
-        type: number
-        default: 5000
+        - name: id
+          in: path
+          required: True
+          type: string
+        - name: offset
+          in: query
+          required: false
+          type: string
+        - name: maxlines
+          in: query
+          required: false
+          type: number
+          default: 5000
       responses:
-        '200':
+        "200":
           description: List of execution input files
-          schema: {$ref: '#/definitions/ExecutionOutput'}
+          schema: { $ref: "#/definitions/ExecutionOutput" }
 
   /api/11/execution/{id}/abort:
     get:
       summary: Abort a running execution by ID
       operationId: executionAbort
       tags:
-      - execution
+        - execution
       parameters:
-      - name: id
-        in: path
-        required: True
-        type: string
-      - name: asUser
-        in: query
-        type: str
-      - name: forceIncomplete
-        in: query
-        type: boolean
-
+        - name: id
+          in: path
+          required: True
+          type: string
+        - name: asUser
+          in: query
+          type: str
+        - name: forceIncomplete
+          in: query
+          type: boolean
+      responses:
+        "200":
+          description: Success
 
 definitions:
   $ref: definitions.yaml
