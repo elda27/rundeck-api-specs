@@ -208,6 +208,9 @@ paths:
       - name: forceIncomplete
         in: query
         type: boolean
+      responses:
+        '200':
+          description: Success
 
 
 definitions:
