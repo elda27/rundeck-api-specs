@@ -191,6 +191,24 @@ paths:
           description: List of execution input files
           schema: {$ref: '#/definitions/ExecutionOutput'}
 
+  /api/11/execution/{id}/abort:
+    get:
+      summary: Abort a running execution by ID
+      operationId: executionAbort
+      tags:
+      - execution
+      parameters:
+      - name: id
+        in: path
+        required: True
+        type: string
+      - name: asUser
+        in: query
+        type: str
+      - name: forceIncomplete
+        in: query
+        type: boolean
+
 
 definitions:
   $ref: definitions.yaml
